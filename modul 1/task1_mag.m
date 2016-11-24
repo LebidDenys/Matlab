@@ -1,25 +1,18 @@
 data = xlsread('data_mag_rad.xls');
-mag = data(:,7);
+mag = data(:,7); 
+step = (max(mag) - min(mag)) / 5;
+mag_clipped = {[], [], [], [], []}; %array consisting five empty arrays
 
-mag_clipped = []; %clip data from magnetometry
-for i=1:length(mag)
-    if (mag(i)>min(mag)  && mag(i)<max(mag))
-        mag_clipped(end+1) = mag(i);
+for i = 1:length(data)
+    for j = 1:5 
+        if mag(i) >= min(mag) + step * (j-1) && mag(i) <  min(mag) + step * j 
+            mag_clipped{j}(end+1) = mag(i); %clipping data on five equal fragments
+        end
     end
 end
 
-%clip data on 5 equal fragments
-step_mag = (max(mag) - min(mag))/5;
-mag_1 = clipping_function(mag_clipped, min(mag), step_mag, 5);
-mag_2 = clipping_function(mag_clipped, min(mag), step_mag, 2);
-mag_3 = clipping_function(mag_clipped, min(mag), step_mag, 3);
-mag_4 = clipping_function(mag_clipped, min(mag), step_mag, 4);
-mag_5 = clipping_function(mag_clipped, min(mag), step_mag, 5);
-
-hold on %graphics
-hist(mag_1,5);
-hist(mag_2,5);
-hist(mag_3,5);
-hist(mag_4,5);
-hist(mag_5,5);
+hold on
+for i = 1:5
+    hist(mag_clipped{i},5); %graphics 
+end
 legend('magnetometry');

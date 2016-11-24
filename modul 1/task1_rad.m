@@ -1,25 +1,18 @@
 data = xlsread('data_mag_rad.xls');
-rad = data(:,6);
+rad = data(:,6); 
+step = (max(rad) - min(rad)) / 5;
+rad_clipped = {[], [], [], [], []}; %array consisting five empty arrays
 
-rad_clipped = [];
-for i=1:length(rad) %clip data from radiometry
-    if (rad(i)>min(rad)  && rad(i)<max(rad))
-        rad_clipped(end+1) = rad(i);
+for i = 1:length(data)
+    for j = 1:5 
+        if mag(i) >= min(rad) + step * (j-1) && rad(i) <  min(rad) + step * j 
+            rad_clipped{j}(end+1) = rad(i); %clipping data on five equal fragments
+        end
     end
 end
 
-%clip data on 5 equal fragments
-step_rad = (max(rad) - min(rad))/5;
-rad_1 = clipping_function(rad_clipped, min(rad), step_rad, 1);
-rad_2 = clipping_function(rad_clipped, min(rad), step_rad, 2);
-rad_3 = clipping_function(rad_clipped, min(rad), step_rad, 3);
-rad_4 = clipping_function(rad_clipped, min(rad), step_rad, 4);
-rad_5 = clipping_function(rad_clipped, min(rad), step_rad, 5);
-
-hold on %graphics
-hist(rad_1,5);
-hist(rad_2,5);
-hist(rad_3,5);
-hist(rad_4,5);
-hist(rad_5,5);
+hold on
+for i = 1:5
+    hist(rad_clipped{i},5); %graphics 
+end
 legend('gamma');
