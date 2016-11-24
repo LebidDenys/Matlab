@@ -33,4 +33,4 @@ hold on; %graphics
 plot(mag_average,'b'); 
 plot(rad_average,'r');
 plot(correlation, 'g');
-legend('magnetometry','gamma','correlation')
+legend('magnetometry','gamma','correlation');
