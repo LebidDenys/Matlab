@@ -1,14 +1,14 @@
-data = xlsread('data_mag_rad.xls'); 
+data = xlsread('data_mag_rad.xls');
 mag = data(:,7);
 
-mag_clipped = []; %clipping data from magnetometry
+mag_clipped = []; %clip data from magnetometry
 for i=1:length(mag)
     if (mag(i)>min(mag)  && mag(i)<max(mag))
         mag_clipped(end+1) = mag(i);
     end
 end
 
-%clipping data on 5 equal fragments
+%clip data on 5 equal fragments
 step_mag = (max(mag) - min(mag))/5;
 mag_1 = clipping_function(mag_clipped, min(mag), step_mag, 5);
 mag_2 = clipping_function(mag_clipped, min(mag), step_mag, 2);

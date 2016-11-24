@@ -1,5 +1,5 @@
-function clippted_value = clipping_function(data, minimal_value, step, number_of_step) 
-    %function that clipp data 
+function clippted_value = clipping_function(data, minimal_value, step, number_of_step)
+    %function that clip data
     %from minimal value + step * number of previous step
     %to  minimal value + step * number of step
     clippted_value = [];
