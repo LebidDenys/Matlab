@@ -3,8 +3,8 @@ mag = data(:,7);
 step = (max(mag) - min(mag)) / 5;
 mag_clipped = {[], [], [], [], []}; %array consisting five empty arrays
 
-for i = 1:length(data)
-    for j = 1:5 
+for j = 1:5
+    for  i = 1:length(data)
         if mag(i) >= min(mag) + step * (j-1) && mag(i) <  min(mag) + step * j 
             mag_clipped{j}(end+1) = mag(i); %clipping data on five equal fragments
         end
