@@ -1,23 +1,25 @@
 data = xlsread('data_mag_rad.xls');
 mag = data(:,7);
 rad = data(:,6);
+window_size = 5;
+window_radius = (window_size - 1)/2;
 
 mag_norm = (max(mag) - mag)/(max(mag) - min(mag)); %normalizing
 rad_norm = (max(rad) - rad)/(max(rad) - min(rad));
 
-mag_average = 1:mag_norm/5; %creating a matrix for average data
-rad_average = 1:rad_norm/5;
+mag_average = 1:(mag_norm - 2*window_radius); %creating a matrix for average data
+rad_average = 1:(rad_norm - 2*window_radius);
 
 j = 1;
-for i = 5:5:length(mag_norm) %calculating average magnitographic values
-    local = mag_norm(i-4:i);
+for i = (window_radius + 1):(length(mag_norm) - window_radius) %calculating average magnitographic values
+    local = mag_norm(i - window_radius:i + window_radius);
     mag_average(j) = mean(local);
     j = j + 1;
 end
 
 j = 1;
-for i = 5:5:length(rad_norm) %calculating the average gamma
-    local = rad_norm(i-4:i);
+for i = (window_radius + 1):(length(rad_norm) - window_radius) %calculating the average gamma
+    local = rad_norm(i - window_radius:i + window_radius);
     rad_average(j) = mean(local);
     j = j + 1;
 end
