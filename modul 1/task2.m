@@ -1,4 +1,5 @@
-y_values = [1,1.8,0,-0.5,0,0.5,1];%initial data
+y_values = [-1,-1.8,-2.5,0,3,2.5,1];%initial data
+%1,1.8,2.6,0.5,-3,-2.5,1
 x_values = (0: pi/300: 2*pi);
 x_actual = (0: pi/3: 2*pi);
 
@@ -15,11 +16,11 @@ for i = 1:length(x_values)%calculating x matrix
     x_matrix(2) = x_matrix(2) + sin(x_values(i))*cos(x_values(i));
     x_matrix(4) = x_matrix(4) + cos(x_values(i))^2;
 end
-
 x_matrix(3) = x_matrix(2); 
-coefficients_matrix =x_matrix\y_matrix;%calculating coefficients
-result = sin(coefficients_matrix(1)*sin(x_values + coefficients_matrix(2))) * 10^4;
 
+coefficients_matrix = x_matrix\y_matrix;%calculating coefficients
+result = -sin(coefficients_matrix(1)*sin(x_values + coefficients_matrix(2))) * 10^3.5;
+%result = -(sin(coef_matrix(1)*sin(x + coef_matrix(2)))) * 10^4;
 hold on;%graphics
 plot(x_actual, y_values, '*');
 plot(x_values, result, 'g', 'linewidth', 1);

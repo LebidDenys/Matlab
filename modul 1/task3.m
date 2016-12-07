@@ -7,8 +7,8 @@ window_radius = (window_size - 1)/2;
 mag_norm = (max(mag) - mag)/(max(mag) - min(mag)); %normalizing
 rad_norm = (max(rad) - rad)/(max(rad) - min(rad));
 
-mag_average = 1:(mag_norm - 2*window_radius); %creating a matrix for average data
-rad_average = 1:(rad_norm - 2*window_radius);
+mag_average = 1:(length(mag_norm) - 2*window_radius); %creating a matrix for average data
+rad_average = 1:(length(rad_norm) - 2*window_radius);
 
 j = 1;
 for i = (window_radius + 1):(length(mag_norm) - window_radius) %calculating average magnitographic values

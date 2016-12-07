@@ -19,3 +19,5 @@ histogram(rad_fragments{3},10);
 histogram(rad_fragments{4},10);
 histogram(rad_fragments{5},10);
 legend('1 fragment', '2 fragment', '3 fragment', '4 fragment' ,'5 fragment');
+
+
