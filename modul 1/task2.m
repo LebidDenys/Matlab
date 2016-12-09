@@ -1,5 +1,4 @@
 y_values = [-1,-1.8,-2.5,0,3,2.5,1];%initial data
-%1,1.8,2.6,0.5,-3,-2.5,1
 x_values = (0: pi/300: 2*pi);
 x_actual = (0: pi/3: 2*pi);
 
